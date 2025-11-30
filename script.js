@@ -1,9 +1,3 @@
-// Program name: script.js
-// Author: Your Name Here
-// Date created: 10/20/2025
-// Date last edited: 11/29/2025
-// Version: 4.0
-// Description: External JavaScript for Patient Registration Form - Homework 4
 
 let formErrors = {};
 let ssnActualValue = "";
