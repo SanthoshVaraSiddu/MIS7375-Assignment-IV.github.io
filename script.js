@@ -1,3 +1,4 @@
+
 let formErrors = {};
 let ssnActualValue = "";
 let lastSSNMaskedLength = 0;
@@ -183,57 +184,6 @@ function validateFirstName() {
     }
     clearError("firstName");
     saveFieldToLocalStorage("firstName", value);
-
-    // Also save to cookie if Remember Me is checked
-    const rememberMe = document.getElementById("rememberMe");
-    if (rememberMe && rememberMe.checked) {
-        setNameCookie(value);
-        // Update welcome message immediately
-        const welcomeSpan = document.getElementById("welcome-message");
-        const notYouContainer = document.getElementById("not-you-container");
-        if (welcomeSpan) {
-            welcomeSpan.textContent = "Welcome back, " + value;
-        }
-        if (notYouContainer) {
-            notYouContainer.innerHTML = "";
-            const label = document.createElement("label");
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.id = "notYou";
-            label.appendChild(checkbox);
-            label.appendChild(document.createTextNode(" Not " + value + "? Click here to start as a NEW USER."));
-            notYouContainer.appendChild(label);
-
-            checkbox.addEventListener("change", function () {
-                if (this.checked) {
-                    eraseNameCookie();
-                    clearAllLocalStorageData();
-                    const form = document.getElementById("patient-form");
-                    if (form) {
-                        form.reset();
-                        const reviewContainer = document.getElementById("review-container");
-                        if (reviewContainer) {
-                            reviewContainer.style.display = "none";
-                        }
-                        const scoreEl = document.getElementById("score");
-                        if (scoreEl) scoreEl.textContent = "5";
-                        ssnActualValue = "";
-                        lastSSNMaskedLength = 0;
-                        formErrors = {};
-                        const errorSpans = document.querySelectorAll(".error-message");
-                        errorSpans.forEach((span) => {
-                            span.textContent = "";
-                            span.style.display = "none";
-                        });
-                        updateSubmitButton();
-                    }
-                    welcomeSpan.textContent = "Welcome new user";
-                    notYouContainer.innerHTML = "";
-                }
-            });
-        }
-    }
-
     return true;
 }
 
@@ -1026,7 +976,61 @@ function populateFormFromLocalStorage() {
     if (!form) return;
 
     const firstName = getFieldFromLocalStorage("firstName");
-    if (firstName !== null) form.firstName.value = firstName;
+    if (firstName !== null) {
+        form.firstName.value = firstName;
+
+        // Set cookie and update welcome message when page loads with saved data
+        const rememberMe = document.getElementById("rememberMe");
+        if (rememberMe && rememberMe.checked) {
+            setNameCookie(firstName);
+
+            const welcomeSpan = document.getElementById("welcome-message");
+            const notYouContainer = document.getElementById("not-you-container");
+
+            if (welcomeSpan) {
+                welcomeSpan.textContent = "Welcome back, " + firstName;
+            }
+
+            if (notYouContainer) {
+                notYouContainer.innerHTML = "";
+                const label = document.createElement("label");
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.id = "notYou";
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(" Not " + firstName + "? Click here to start as a NEW USER."));
+                notYouContainer.appendChild(label);
+
+                checkbox.addEventListener("change", function () {
+                    if (this.checked) {
+                        eraseNameCookie();
+                        clearAllLocalStorageData();
+                        const form = document.getElementById("patient-form");
+                        if (form) {
+                            form.reset();
+                            const reviewContainer = document.getElementById("review-container");
+                            if (reviewContainer) {
+                                reviewContainer.style.display = "none";
+                            }
+                            const scoreEl = document.getElementById("score");
+                            if (scoreEl) scoreEl.textContent = "5";
+                            ssnActualValue = "";
+                            lastSSNMaskedLength = 0;
+                            formErrors = {};
+                            const errorSpans = document.querySelectorAll(".error-message");
+                            errorSpans.forEach((span) => {
+                                span.textContent = "";
+                                span.style.display = "none";
+                            });
+                            updateSubmitButton();
+                        }
+                        welcomeSpan.textContent = "Welcome new user";
+                        notYouContainer.innerHTML = "";
+                    }
+                });
+            }
+        }
+    }
 
     const middleInitial = getFieldFromLocalStorage("middleInitial");
     if (middleInitial !== null) form.middleInitial.value = middleInitial;
