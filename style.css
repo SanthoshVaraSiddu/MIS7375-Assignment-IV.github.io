@@ -1,0 +1,409 @@
+/* Program name: style.css
+   Author: Your Name Here
+   Date created: 09/14/2025
+   Date last edited: 11/29/2025
+   Version: 4.0
+   Description: Stylesheet for Patient Registration Form - Homework 4 */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fffbea;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Required field asterisk */
+.required {
+    color: red;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+/* Instruction text */
+.instruction-text {
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff9e6;
+    border-radius: 5px;
+    border: 1px solid #ffd700;
+}
+
+/* Submit note */
+.submit-note {
+    color: #666;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* Error message styling */
+.error-message {
+    display: none;
+    color: #dc3545;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 3px;
+    margin-left: 5px;
+    min-height: 18px;
+    line-height: 18px;
+}
+
+/* Banner Styles (sticky header) */
+#banner {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #ffd700;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 3px solid #a15300;
+}
+
+#banner-logo {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+#company-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #a15300;
+    vertical-align: middle;
+}
+
+#banner-date {
+    font-size: 14px;
+    color: #333;
+}
+
+#welcome-message {
+    display: inline-block;
+    margin-top: 5px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#not-you-container {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #333;
+}
+
+#not-you-container input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+/* Live time */
+#live-time {
+    float: right;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Main Container - Side by Side Layout */
+#main-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 80px auto 60px auto;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+#form-container {
+    flex: 1;
+    min-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#review-container {
+    flex: 1;
+    min-width: 400px;
+    background-color: #fff9e6;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 2px solid #ffd700;
+}
+
+/* Headings */
+h1 {
+    color: #a15300;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+h2 {
+    color: #a15300;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    border-bottom: 2px solid #ffd700;
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #a15300;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ffd700;
+    padding-bottom: 5px;
+}
+
+/* Form Styles */
+form {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+td {
+    padding: 8px;
+    vertical-align: top;
+}
+
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=password],
+input[type=date],
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=tel]:focus,
+input[type=password]:focus,
+input[type=date]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* Input with error styling */
+input.error,
+select.error,
+textarea.error {
+    border-color: #dc3545 !important;
+    background-color: #fff5f5;
+}
+
+input.valid,
+select.valid,
+textarea.valid {
+    border-color: #28a745;
+}
+
+/* Checkbox and Radio Styles */
+input[type=checkbox],
+input[type=radio] {
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+/* Range Slider */
+input[type=range] {
+    width: 60%;
+    margin: 0 10px;
+}
+
+#score {
+    font-weight: bold;
+    color: #a15300;
+    font-size: 18px;
+}
+
+/* Buttons */
+button {
+    background-color: #ffd700;
+    color: #a15300;
+    padding: 10px 20px;
+    border: 2px solid #a15300;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffed4e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button[type=submit] {
+    background-color: #ff6b35;
+    color: white;
+    border-color: #cc4522;
+}
+
+button[type=submit]:hover:not(:disabled) {
+    background-color: #ff8555;
+}
+
+button[type=submit]:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    border-color: #999999;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+button[type=submit]:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Review Display Styles */
+.review-section {
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.review-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.review-row:last-child {
+    border-bottom: none;
+}
+
+.review-label {
+    font-weight: bold;
+    color: #555;
+    flex: 1;
+}
+
+.review-value {
+    flex: 2;
+    color: #333;
+}
+
+.review-status {
+    flex: 0.5;
+    text-align: right;
+    font-weight: bold;
+}
+
+.pass {
+    color: #28a745;
+}
+
+.error {
+    color: #dc3545;
+}
+
+/* iframe */
+#iframe,
+#info-frame {
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Fixed Footer (content protection) */
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffd700;
+    padding: 10px 15px;
+    text-align: center;
+    border-top: 3px solid #a15300;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+#footer a {
+    color: #a15300;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
+
+#footer button {
+    background-color: #ff6b35;
+    color: white;
+    border: 1px solid #cc4522;
+    padding: 5px 15px;
+    font-size: 12px;
+    margin: 0 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    #main-container {
+        flex-direction: column;
+    }
+
+    #form-container,
+    #review-container {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 12px;
+    }
+
+    input[type=text],
+    input[type=email],
+    input[type=tel],
+    input[type=password],
+    input[type=date],
+    select,
+    textarea {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+
+    .error-message {
+        font-size: 11px;
+    }
+}

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<!-- Program name: homework4.html
+     Author: Your Name Here
+     Date created: 09/14/2025
+     Date last edited: 11/29/2025
+     Version: 4.0
+     Description: Patient Registration Form with real-time validation, Fetch, iframe, cookies, localStorage, and time-based events -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Patient Registration Form - Golden Pulse Medical</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="banner">
+        <img src="logo.png" alt="Company Logo" id="banner-logo" style="vertical-align:middle; width:50px; height:50px;">
+        <span id="company-name">Golden Pulse Medical</span>
+        <br>
+        <span id="welcome-message">Welcome new user</span>
+        <span id="not-you-container"></span>
+        <br>
+        <span id="banner-date">Today is <span id="current-date"></span></span>
+        <span id="live-time"></span>
+    </div>
+
+    <div id="main-container">
+        <div id="form-container">
+            <h1>Patient Registration Form</h1>
+            <p class="instruction-text">
+                All fields marked with <span class="required">*</span> are required.
+                Errors will be shown in real-time as you fill out the form.
+            </p>
+
+            <form id="patient-form" action="thankyou.html" method="get">
+                <table>
+                    <!-- Block 1 Names and Dates -->
+                    <tr>
+                        <td style="text-align:right;">First Name <span class="required">*</span></td>
+                        <td>
+                            <input type="text" name="firstName" id="firstName" maxlength="30"
+                                   pattern="[A-Za-z'-]{1,30}"
+                                   title="Enter your first name 1-30 characters, letters, hyphens, and apostrophes only"
+                                   placeholder="Enter first name">
+                            <span id="firstName-error" class="error-message"></span>
+                        </td>
+                        <td style="text-align:right;">Middle Initial</td>
+                        <td>
+                            <input type="text" name="middleInitial" maxlength="1"
+                                   pattern="[A-Za-z]?"
+                                   title="Enter middle initial (optional, one letter only)"
+                                   placeholder="M">
+                            <span id="middleInitial-error" class="error-message"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;">Last Name <span class="required">*</span></td>
+                        <td>
+                            <input type="text" name="lastName" maxlength="30"
+                                   pattern="[A-Za-z'-2-5]{1,30}"
+                                   title="Enter your last name 1-30 characters, letters, hyphens, apostrophes, and numbers 2-5 only"
+                                   placeholder="Enter last name">
+                            <span id="lastName-error" class="error-message"></span>
+                        </td>
+                        <td style="text-align:right;">Date of Birth <span class="required">*</span></td>
+                        <td>
+                            <input type="date" name="dob" id="dob"
+                                   title="Select your date of birth (must be between 120 years ago and today)">
+                            <span id="dob-error" class="error-message"></span>
+                        </td>
+                    </tr>
+
+                    <!-- Block 2 Contact Info -->
+                    <tr>
+                        <td style="text-align:right;">Social Security <span class="required">*</span></td>
+                        <td>
+                            <input type="text" name="ssn" id="ssn" maxlength="11"
+                                   placeholder="XXX-XX-XXXX"
+                                   title="Enter 9 digits for SSN; digits will be masked as XXX-XX-XXXX"
+                                   oninput="formatSSN(this)">
+                            <span id="ssn-error" class="error-message"></span>
+                        </td>
+                        <td style="text-align:right;">Email <span class="required">*</span></td>
+                        <td>
+                            <input type="email" name="email" maxlength="50"
+                                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                   title="Enter valid email address (name@domain.com)"
+                                   placeholder="name@example.com">
+                            <span id="email-error" class="error-message"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;">Phone Number <span class="required">*</span></td>
+                        <td colspan="3">
+                            <input type="tel" name="phone" id="phone" maxlength="14"
+                                   placeholder="XXX-XXX-XXXX"
+                                   pattern="\d{3}-\d{3}-\d{4}"
+                                   title="Enter phone number in format XXX-XXX-XXXX"
+                                   style="width:98%;">
+                            <span id="phone-error" class="error-message"></span>
+                        </td>
+                    </tr>
+
+                    <!-- Block 3 Address -->
+                    <tr>
+                        <td style="text-align:right;">Address Line 1 <span class="required">*</span></td>
+                        <td colspan="3">
+                            <input type="text" name="address1" maxlength="30"
+                                   pattern=".{2,30}"
+                                   title="Enter street address (2-30 characters, required)"
+                                   placeholder="123 Main Street"
+                                   style="width:98%;">
+                            <span id="address1-error" class="error-message"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;">Address Line 2</td>
+                        <td colspan="3">
+                            <input type="text" name="address2" maxlength="30"
+                                   pattern=".{0}|.{2,30}"
+                                   title="Enter apartment/suite number (optional, but if entered must be 2-30 characters)"
+                                   placeholder="Apt 4B (optional)"
+                                   style="width:98%;">
+                            <span id="address2-error" class="error-message"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;">City <span class="required">*</span></td>
+                        <td>
+                            <input type="text" name="city" maxlength="30"
+                                   pattern="[A-Za-z' -]{2,30}"
+                                   title="Enter city name 2-30 characters, letters only"
+                                   placeholder="Enter city">
+                            <span id="city-error" class="error-message"></span>
+                        </td>
+                        <td style="text-align:right;">State <span class="required">*</span></td>
+                        <td>
+                            <select name="state" id="state" title="Select your state from the dropdown">
+                                <option value="">Select State</option>
+                            </select>
+                            <span id="state-error" class="error-message"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;">ZIP Code <span class="required">*</span></td>
+                        <td colspan="3">
+                            <input type="text" name="zip" id="zip" maxlength="5"
+                                   placeholder="12345"
+                                   pattern="\d{5}"
+                                   title="Enter ZIP code (5 digits only)"
+                                   style="width:98%;">
+                            <span id="zip-error" class="error-message"></span>
+                        </td>
+                    </tr>
+
+                    <!-- Block 4 Medical Info -->
+                    <tr>
+                        <td style="text-align:right;">Describe Symptoms</td>
+                        <td colspan="3">
+                            <textarea name="symptoms" rows="3" cols="50"
+                                      placeholder="Describe current symptoms here..."
+                                      title="Describe your symptoms in detail (optional)"
+                                      style="width:98%;"></textarea>
+                            <span id="symptoms-error" class="error-message"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right; vertical-align:top;">Medical History</td>
+                        <td colspan="3" id="medical-history-container">
+                            <!-- Will be filled by Fetch -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;">Gender <span class="required">*</span></td>
+                        <td colspan="3">
+                            <input type="radio" name="gender" value="Male" title="Select Male">Male
+                            <input type="radio" name="gender" value="Female" title="Select Female">Female
+                            <input type="radio" name="gender" value="Other" title="Select Other">Other
+                            <span id="gender-error" class="error-message"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;">Vaccinated?</td>
+                        <td>
+                            <input type="radio" name="vaccinated" value="Yes" title="Select if vaccinated">Yes
+                            <input type="radio" name="vaccinated" value="No" title="Select if not vaccinated">No
+                        </td>
+                        <td style="text-align:right;">Insurance?</td>
+                        <td>
+                            <input type="radio" name="insurance" value="Yes" title="Select if you have insurance">Yes
+                            <input type="radio" name="insurance" value="No" title="Select if you don't have insurance">No
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;">Health Score</td>
+                        <td colspan="3">
+                            On a scale of 1 to 10, how is your health?
+                            <input type="range" name="healthscore" id="healthscore" min="1" max="10" value="5"
+                                   title="Slide to rate your health from 1 (poor) to 10 (excellent)">
+                            <span id="score">5</span>/10
+                        </td>
+                    </tr>
+
+                    <!-- Block 5 User Credentials -->
+                    <tr>
+                        <td style="text-align:right;">User ID <span class="required">*</span></td>
+                        <td colspan="3">
+                            <input type="text" name="userId" maxlength="20" id="userId"
+                                   pattern="[A-Za-z][A-Za-z0-9_-]{4,19}"
+                                   title="Enter desired user ID 5-20 characters, must start with letter, letters/numbers/underscore/dash only, no spaces"
+                                   placeholder="Enter user ID (5-20 chars, starts with letter)"
+                                   style="width:98%;">
+                            <span id="userId-error" class="error-message"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;">Password <span class="required">*</span></td>
+                        <td colspan="3">
+                            <input type="password" name="password" maxlength="30" id="password"
+                                   title="Enter password 8-30 characters, must include 1 uppercase, 1 lowercase, 1 number, 1 special character"
+                                   placeholder="Enter password"
+                                   style="width:98%;">
+                            <span id="password-error" class="error-message"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;">Re-enter Password <span class="required">*</span></td>
+                        <td colspan="3">
+                            <input type="password" name="repassword" maxlength="30" id="repassword"
+                                   title="Re-enter your password to confirm"
+                                   placeholder="Re-enter password"
+                                   style="width:98%;">
+                            <span id="repassword-error" class="error-message"></span>
+                        </td>
+                    </tr>
+
+                    <!-- Remember Me / Buttons -->
+                    <tr>
+                        <td style="text-align:right;">Remember Me</td>
+                        <td colspan="3">
+                            <input type="checkbox" id="rememberMe" checked>
+                            <label for="rememberMe">Remember this device for up to 48 hours</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" style="text-align:center; padding-top: 20px;">
+                            <button type="button" onclick="clearForm()">CLEAR AND START OVER</button>
+                            <button type="button" onclick="reviewForm()">REVIEW</button>
+                            <button type="submit" id="submit-btn">SUBMIT</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:center;">
+                            <p class="submit-note">
+                                Note: Submit button will be enabled only when all required fields are correctly filled.
+                                Session time left: <span id="time-remaining">10:00</span>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!-- Right side: Review + iframe example -->
+        <div id="review-container" style="display:none;">
+            <h2>PLEASE REVIEW THIS INFORMATION</h2>
+            <div id="review-content"></div>
+            <div style="text-align:center; margin-top:20px;">
+                <p>If everything looks correct, click the SUBMIT button on the left.</p>
+            </div>
+
+            <h2>Helpful Health Resources</h2>
+            <p class="instruction-text">External content embedded using an iframe.</p>
+            <iframe
+                id="info-frame"
+                src="https://www.cdc.gov"
+                title="Health Information"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+            ></iframe>
+        </div>
+    </div>
+
+    <div id="footer">
+        <span>Golden Pulse Medical</span>
+        &nbsp;
+        <button onclick="location.href='mailto:contact@goldenpulse.com'">Contact Us</button>
+        &nbsp;
+        <a href="https://facebook.com" target="_blank">FB</a>
+        &nbsp;
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+        &nbsp;
+        <span>Dover Park Ln, Katy, TX, 77045</span>
+    </div>
+</body>
+</html>

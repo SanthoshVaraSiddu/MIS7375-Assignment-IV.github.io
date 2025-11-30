@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You - Golden Pulse Medical</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="banner">
+        <img src="logo.png" alt="Company Logo" id="banner-logo" style="vertical-align:middle; width:50px; height:50px;">
+        <span id="company-name">Golden Pulse Medical</span>
+        <br>
+        <span id="banner-date">Today is <span id="current-date"></span></span>
+    </div>
+
+    <div style="max-width:800px; margin:120px auto 80px auto; background-color:white; padding:30px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center;">
+        <h1>Thank You!</h1>
+        <p>Your registration has been submitted.</p>
+        <p><a href="index.html">Return to the registration form</a></p>
+    </div>
+
+    <div id="footer">
+        <span>Golden Pulse Medical</span>
+        &nbsp;
+        <button onclick="location.href='mailto:contact@goldenpulse.com'">Contact Us</button>
+        &nbsp;
+        <a href="https://facebook.com" target="_blank">FB</a>
+        &nbsp;
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+        &nbsp;
+        <span>Dover Park Ln, Katy, TX, 77045</span>
+    </div>
+
+    <script>
+        const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+        const now = new Date();
+        const dayName = days[now.getDay()];
+        const monthName = months[now.getMonth()];
+        const day = now.getDate();
+        const year = now.getFullYear();
+        const formatted = dayName + ", " + monthName + " " + day + ", " + year;
+        document.getElementById("current-date").textContent = formatted;
+    </script>
+</body>
+</html>
