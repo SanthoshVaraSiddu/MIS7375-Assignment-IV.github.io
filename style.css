@@ -6,14 +6,13 @@ body {
     color: #333;
 }
 
-/* Required field asterisk */
+
 .required {
     color: red;
     font-weight: bold;
     margin-left: 2px;
 }
 
-/* Instruction text */
 .instruction-text {
     text-align: center;
     color: #555;
@@ -25,7 +24,6 @@ body {
     border: 1px solid #ffd700;
 }
 
-/* Submit note */
 .submit-note {
     color: #666;
     font-size: 12px;
@@ -33,7 +31,6 @@ body {
     margin-top: 10px;
 }
 
-/* Error message styling */
 .error-message {
     display: none;
     color: #dc3545;
@@ -45,7 +42,7 @@ body {
     line-height: 18px;
 }
 
-/* Banner Styles (sticky header) */
+
 #banner {
     position: sticky;
     top: 0;
@@ -152,7 +149,6 @@ h3 {
     padding-bottom: 5px;
 }
 
-/* Form Styles */
 form {
     width: 100%;
 }
@@ -195,7 +191,6 @@ textarea:focus {
     box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 }
 
-/* Input with error styling */
 input.error,
 select.error,
 textarea.error {
@@ -209,14 +204,13 @@ textarea.valid {
     border-color: #28a745;
 }
 
-/* Checkbox and Radio Styles */
 input[type=checkbox],
 input[type=radio] {
     margin-right: 5px;
     margin-left: 10px;
 }
 
-/* Range Slider */
+
 input[type=range] {
     width: 60%;
     margin: 0 10px;
@@ -228,7 +222,6 @@ input[type=range] {
     font-size: 18px;
 }
 
-/* Buttons */
 button {
     background-color: #ffd700;
     color: #a15300;
@@ -275,7 +268,7 @@ button[type=submit]:disabled:hover {
     box-shadow: none;
 }
 
-/* Review Display Styles */
+
 .review-section {
     margin-bottom: 20px;
     background-color: white;
@@ -320,7 +313,7 @@ button[type=submit]:disabled:hover {
     color: #dc3545;
 }
 
-/* iframe */
+
 #iframe,
 #info-frame {
     width: 100%;
@@ -329,7 +322,7 @@ button[type=submit]:disabled:hover {
     border-radius: 4px;
 }
 
-/* Fixed Footer (content protection) */
+
 #footer {
     position: fixed;
     bottom: 0;
@@ -363,7 +356,7 @@ button[type=submit]:disabled:hover {
     margin: 0 5px;
 }
 
-/* Responsive Design */
+
 @media (max-width: 1200px) {
     #main-container {
         flex-direction: column;
@@ -400,3 +393,4 @@ button[type=submit]:disabled:hover {
         font-size: 11px;
     }
 }
+
